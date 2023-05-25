@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 
-function PersonalDetail ({ onSubmit }){
+function PersonalDetail ({onSubmit}){
 
     const [formValues, setFormValues] = useState({
         firstName: '',
@@ -20,12 +20,11 @@ function PersonalDetail ({ onSubmit }){
         }));
       };
     
-      const handleSubmit = (e) => {
-        e.preventDefault();
+      
         onSubmit(formValues); // Pass the form values to the parent component
-      };
+     const formRef=useRef() 
     return (
-        <>
+        <form>
            <div className='row  mb-4'>
                 <div className="col-sm-6">
                     <input
@@ -41,9 +40,11 @@ function PersonalDetail ({ onSubmit }){
                 <div className="col-sm-6">
                     <input
                         type="text"
-                        name="lasttName"
+                        name="lastName"
                         className="form-control"
                         placeholder="Last Name"
+                        value={formValues.lasstName}
+                        onChange={handleChange}
                     />
 
                 </div>
@@ -56,6 +57,8 @@ function PersonalDetail ({ onSubmit }){
                         name="email"
                         className="form-control"
                         placeholder="Email"
+                        value={formValues.email}
+                        onChange={handleChange}
                     />
                 </div>
 
@@ -65,6 +68,8 @@ function PersonalDetail ({ onSubmit }){
                         name="mobile"
                         className="form-control"
                         placeholder="Mobile Number"
+                        value={formValues.mobile}
+                        onChange={handleChange}
                     />
 
                 </div>
@@ -77,21 +82,25 @@ function PersonalDetail ({ onSubmit }){
                         name="address1"
                         className="form-control"
                         placeholder="AddressLine 1"
+                        value={formValues.address1}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="col-sm-6">
                     <input
                         type="text"
-                        name="adress2"
+                        name="address2"
                         className="form-control"
                         placeholder="Address Line 2"
+                        value={formValues.address2}
+                        onChange={handleChange}
                     />
 
                 </div>
 
             </div>
-        </>
+        </form>
     )
 }
 export default PersonalDetail

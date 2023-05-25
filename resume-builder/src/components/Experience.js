@@ -1,9 +1,34 @@
-import React from "react";
 
+import React, { useState,useEffect } from 'react';
 
-function Experience (){
-    return(
-        <>
+const Experience = ({ experienceId, onRemove,onSubmit }) => {
+    const [values, setValues] = useState({});
+  const [experience, setExperience] = useState({});
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setValues((prevValues) => ({
+        ...prevValues,
+        [name]: value,
+      }));
+  };
+
+  const handleRemove = () => {
+    onRemove(experienceId);
+  };
+  
+
+const handleExperienceSubmit = () => {
+    onSubmit(experienceId, values);
+  };
+
+  useEffect(() => {
+    handleExperienceSubmit();
+  }, [values]); 
+
+  return (
+    <>
+       <div>
         <div className='row  mb-3'>
         <div className="col-sm-6">
             <input
@@ -11,6 +36,7 @@ function Experience (){
                 name="JobTitle"
                 className="form-control"
                 placeholder="Job Title"
+                onChange={handleChange}
             />
         </div>
 
@@ -20,6 +46,7 @@ function Experience (){
                 name="employer"
                 className="form-control"
                 placeholder="Employer"
+                onChange={handleChange}
             />
         </div>
     </div>
@@ -27,18 +54,20 @@ function Experience (){
         <div className="col-sm-6">
             <input
                 type="date"
-                name="startdate"
+                name="startDate"
                 className="form-control"
                 placeholder="MM-DD-YY"
+                onChange={handleChange}
             />
         </div>
 
         <div className="col-sm-6">
             <input
                 type="date"
-                name="enddate"
+                name="endDate"
                 className="form-control"
                 placeholder="MM-DD-YY"
+                onChange={handleChange}
             />
         </div>
     </div>
@@ -52,7 +81,16 @@ function Experience (){
             <label> I currently work here</label>
         </div>
     </div>
+    <center>
+        <button type='button' className="btn btn-outline-danger center mb-3" onClick={handleRemove}>
+            
+        Remove Experience
+      </button>
+      </center>
+    </div>
+    
     </>
-    )
-}
-export default Experience
+  );
+};
+
+export default Experience;
