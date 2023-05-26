@@ -1,6 +1,6 @@
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 
-function PersonalDetail ({onSubmit}){
+function PersonalDetail({ onSubmit }) {
 
     const [formValues, setFormValues] = useState({
         firstName: '',
@@ -9,31 +9,30 @@ function PersonalDetail ({onSubmit}){
         mobile: '',
         address1: '',
         address2: '',
-      });
+    });
 
-      const handleChange = (e) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
-       
         setFormValues((prevValues) => ({
-          ...prevValues,
-          [name]: value,
+            ...prevValues,
+            [name]: value,
         }));
-      };
-    
-      
-        onSubmit(formValues); // Pass the form values to the parent component
-     const formRef=useRef() 
+    };
+
+    onSubmit(formValues); // pass personal details to resume 
+
     return (
-        <form>
-           <div className='row  mb-4'>
+        <>
+            <div className='row  mb-4'>
                 <div className="col-sm-6">
                     <input
                         type="text"
                         name="firstName"
                         className="form-control"
                         placeholder="First Name"
-                        value={formValues.firstName}
-                       onChange={handleChange}
+                        required
+                        //value={formValues.firstName}
+                        onChange={handleChange}
                     />
                 </div>
 
@@ -41,9 +40,10 @@ function PersonalDetail ({onSubmit}){
                     <input
                         type="text"
                         name="lastName"
+                        required
                         className="form-control"
                         placeholder="Last Name"
-                        value={formValues.lasstName}
+                        //value={formValues.lasstName}
                         onChange={handleChange}
                     />
 
@@ -53,22 +53,23 @@ function PersonalDetail ({onSubmit}){
             <div className='row  mb-4'>
                 <div className="col-sm-6">
                     <input
-                        type="text"
+                        type="email"
                         name="email"
                         className="form-control"
                         placeholder="Email"
-                        value={formValues.email}
+                        required
                         onChange={handleChange}
                     />
                 </div>
 
                 <div className="col-sm-6">
                     <input
-                        type="text"
+                        type="number"
                         name="mobile"
+                        required
                         className="form-control"
                         placeholder="Mobile Number"
-                        value={formValues.mobile}
+                        //value={formValues.mobile}
                         onChange={handleChange}
                     />
 
@@ -82,7 +83,8 @@ function PersonalDetail ({onSubmit}){
                         name="address1"
                         className="form-control"
                         placeholder="AddressLine 1"
-                        value={formValues.address1}
+                        required
+                        //value={formValues.address1}
                         onChange={handleChange}
                     />
                 </div>
@@ -93,14 +95,15 @@ function PersonalDetail ({onSubmit}){
                         name="address2"
                         className="form-control"
                         placeholder="Address Line 2"
-                        value={formValues.address2}
+                        required
+                        //value={formValues.address2}
                         onChange={handleChange}
                     />
 
                 </div>
 
             </div>
-        </form>
+        </>
     )
 }
 export default PersonalDetail
