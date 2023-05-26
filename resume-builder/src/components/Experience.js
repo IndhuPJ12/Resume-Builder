@@ -5,16 +5,14 @@ const Experience = ({ experienceId, onRemove, onSubmit }) => {
 
     //value of experience form fields   
     const [values, setValues] = useState({});
-    //const [experience, setExperience] = useState({});
-
     const [checked, setChecked] = useState(false)
 
     const handleChange = (event) => {
 
         const { name, value } = event.target;
         if (checked) {
-            if (name == 'endDate') {
-                event.target.value = ''
+            if (name === 'endDate') {
+                value = ''
             }
         }
         setValues((prevValues) => ({
@@ -31,13 +29,8 @@ const Experience = ({ experienceId, onRemove, onSubmit }) => {
         onRemove(experienceId);
     };
 
-
-    const handleExperienceSubmit = () => {
-        onSubmit(experienceId, values);
-    };
-
     useEffect(() => {
-        handleExperienceSubmit();
+        onSubmit(experienceId, values);
     }, [values]);
 
     return (
@@ -92,7 +85,7 @@ const Experience = ({ experienceId, onRemove, onSubmit }) => {
                 <div className='row  mb-3'>
                     <div className='col-sm-6'>
                     </div>
-                    {experienceId == 'additional' &&
+                    {experienceId === 'additional' &&
                         <div className='col-sm-6'>
                             <input
                                 type='Checkbox'

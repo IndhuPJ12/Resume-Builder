@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Experience from '../components/Experience';
 import Header from '../components/Header';
@@ -7,20 +7,20 @@ import PersonalDetail from '../components/PersonalDetail';
 import Education from '../components/Education';
 import FinalResume from '../components/FinalResume';
 import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
+
 
 const Resume = () => {
 
-  const formRef = useRef(null)
+
   const [showResume, setShowResume] = useState(false) //to show final resume
   const [experiences, setExperiences] = useState([]);
   const [education, setEducation] = useState([])
   const [personalFormValues, setPersonalFormValues] = useState({});
   const [skill, setSkill] = useState([])
-  const [additionalExperience, setAdditionalExperience] = useState(null);
-  const [additionalEducation, setAdditionalEducation] = useState(null);
+  const [additionalExperience, setAdditionalExperience] = useState(null); //inital experience field
+  const [additionalEducation, setAdditionalEducation] = useState(null); //initial Education field
 
-
+  //options for skill dropdown
   const options = [
     { value: 'reactjs', label: 'ReactJS' },
     { value: 'javascript', label: 'Javascript' },
@@ -42,9 +42,17 @@ const Resume = () => {
     setEducation(education.filter((item) => item.id !== id))
   }
 
+  /*
+   initial education feild values are set to additionalEducation state
+   else will find the id of education feild and assing the values corresponding
+   to that id in another state
+
+  */
   const handleEducationSubmit = (id, values) => {
-    if (id == 'additional') {
+
+    if (id === 'additional') {
       setAdditionalEducation(values);
+
     } else {
       setEducation((prevEducation) => {
         const updatedEducation = [...prevEducation];
@@ -64,11 +72,10 @@ const Resume = () => {
   };
   const handleExperienceSubmit = (id, values) => {
 
-    if (id == 'additional') {
+    if (id === 'additional') {
       setAdditionalExperience(values);
     }
     else {
-
       setExperiences((prevExperiences) => {
         const updatedExperiences = [...prevExperiences];
 
@@ -77,8 +84,6 @@ const Resume = () => {
         return updatedExperiences;
       });
     }
-    //  }
-
   };
   const addSkill = (selectedSkills) => {
     setSkill(selectedSkills)
@@ -87,14 +92,6 @@ const Resume = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const experienceValues = experiences.map((experience) => ({
-      ...experience.values,
-    }));
-    const educationValues = education.map((education) => ({
-      ...education.values,
-    }));
-    console.log(personalFormValues)
-    console.log(additionalExperience)
     setShowResume(true)
 
   };
@@ -103,23 +100,20 @@ const Resume = () => {
     <>
       <Header />
       <div className='container'>
+
         {!showResume ? (
-          <form onSubmit={handleSubmit} ref={formRef}>
+          <form onSubmit={handleSubmit} >
             <h3>Personal Details</h3>
             <PersonalDetail onSubmit={handlePersonalDetailSubmit} />
 
             <h3>Experience</h3>
 
             <Experience
-              //key={"additional"}
-              //experienceId={"additional"}
               key="additional-experience"
               experienceId="additional"
               onRemove={removeExperience}
               onSubmit={handleExperienceSubmit}
             />
-
-
 
             {experiences.map((experience) => (
               <Experience
@@ -157,9 +151,8 @@ const Resume = () => {
 
             <h3>Skills</h3>
             <div className='row  mb-3'>
-              <Select isMulti options={options} name='skills' className='col-sm-6' onChange={addSkill} />
+              <Select isMulti options={options} required name='skills' className='col-sm-6' onChange={addSkill} />
             </div>
-
 
             <div>
               <center>

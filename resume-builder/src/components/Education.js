@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 
 const Education = ({ educationId, onRemove, onSubmit }) => {
 
-    //value of education form fields
-    const [values, setValues] = useState([])
 
-    //to remove Education item
-    const handleRemove = () => {
+    const [values, setValues] = useState([])  //value of education form fields
+
+    const handleRemove = () => {  //to remove Education item
         onRemove(educationId)
     }
     const handleChange = (event) => {

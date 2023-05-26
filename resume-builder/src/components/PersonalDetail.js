@@ -31,7 +31,6 @@ function PersonalDetail({ onSubmit }) {
                         className="form-control"
                         placeholder="First Name"
                         required
-                        //value={formValues.firstName}
                         onChange={handleChange}
                     />
                 </div>
@@ -43,7 +42,6 @@ function PersonalDetail({ onSubmit }) {
                         required
                         className="form-control"
                         placeholder="Last Name"
-                        //value={formValues.lasstName}
                         onChange={handleChange}
                     />
 
@@ -69,7 +67,6 @@ function PersonalDetail({ onSubmit }) {
                         required
                         className="form-control"
                         placeholder="Mobile Number"
-                        //value={formValues.mobile}
                         onChange={handleChange}
                     />
 
@@ -82,9 +79,8 @@ function PersonalDetail({ onSubmit }) {
                         type="text"
                         name="address1"
                         className="form-control"
-                        placeholder="AddressLine 1"
+                        placeholder="Address Line 1"
                         required
-                        //value={formValues.address1}
                         onChange={handleChange}
                     />
                 </div>
@@ -96,7 +92,6 @@ function PersonalDetail({ onSubmit }) {
                         className="form-control"
                         placeholder="Address Line 2"
                         required
-                        //value={formValues.address2}
                         onChange={handleChange}
                     />
 
